@@ -8,7 +8,7 @@ namespace LINQ
 {
     public class Country
     {
-        public string name { get; private set; }
+        public string name { get; init; }
         public string capital { get; private set; }
         public ulong population { get; private set; }
         public uint territory { get; private set; }

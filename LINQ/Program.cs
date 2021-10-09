@@ -25,7 +25,7 @@ namespace LINQ
 
             _menu = new Dictionary<string, IEnumerable<object>>
             {
-                {"1", null},
+                {"1", countries.Select(item => item)},
                 {"2", countries.Select(item => item.name)},
                 {"3", countries.Select(item => item.capital)},
                 {"4", countries.Where(item=>item.partOfTheWorld=="Europe").Select(item=>item.name) },
@@ -42,22 +42,17 @@ namespace LINQ
         }
                 
         private static void Show(IEnumerable<object> items)
-        {
-            if (items==null) ShowAllInfo();
-
-            else
-            {
+        {           
                 foreach (var item in items)
-                    Console.WriteLine($"{item}");
-            }
+            {
+                if (item is Country t) 
+                    Console.WriteLine($"Страна: {t.name}\nСтолица: {t.capital}\nНаселение: {t.population} человек\nПлощадь: {t.territory} км^2\nЧасть света: {t.partOfTheWorld}\n");
+                else Console.WriteLine($"{item}");
+            }                    
              
         }
        
-        private static void ShowAllInfo()
-        {
-             foreach (var country in countries) 
-                Console.WriteLine($"Страна: {country.name}\nСтолица: {country.capital}\nНаселение: {country.population} человек\nПлощадь: {country.territory} км^2\nЧасть света: {country.partOfTheWorld}\n");
-        }
+       
 
     }
 
