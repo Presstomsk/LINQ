@@ -7,9 +7,11 @@ namespace LINQ
 
     class Program
     {
-                
+        delegate void Operation(IEnumerable<object> Obj);
         static void Main()
         {
+            
+
             Country Russia = new Country("Russia", "Moscow", 146748590, 17098246, "Europe");
             Country Latvia = new Country("Latvia", "Riga", 1893700, 64589, "Europe");
             Country China = new Country("China", "Beijing", 1442965000, 9596961, "Asia");
@@ -17,21 +19,35 @@ namespace LINQ
             Country USA = new Country("USA", "Washington", 332278200, 9826675, "North America");
 
             List<Country> countries = new List<Country>() { Russia, Latvia, China, Kenya, USA };
-         
+
+            List<IEnumerable<object>> selects = new List<IEnumerable<object>>()
+            { 
+                countries.Select(item => item),
+                countries.Select(item => item.name),
+                countries.Select(item => item.capital),
+                countries.Where(item=>item.partOfTheWorld=="Europe").Select(item=>item.name),
+                countries.Where(item => item.territory > 1400000 ).Select(item => item.name)
+            };
+
+            Operation Op;
+
             Messages.Info();
 
             var key = Console.ReadLine();
 
-            Dictionary<string, IEnumerable<object>> _menu = new Dictionary<string, IEnumerable<object>>
+            Op = (items) => { Messages.ShowResult(items); };
+
+           Dictionary<string, Operation> _menu = new Dictionary<string, Operation>
             {
-                {"1", countries.Select(item => item) },
-                {"2", countries.Select(item => item.name)},
-                {"3", countries.Select(item => item.capital)},
-                {"4", countries.Where(item=>item.partOfTheWorld=="Europe").Select(item=>item.name)},
-                {"5", countries.Where(item => item.territory > 1400000 ).Select(item => item.name)}
+                  {"1", Op},
+                  {"2", Op},
+                  {"3", Op},
+                  {"4", Op},
+                  {"5", Op}
             };
             if (!_menu.ContainsKey(key)) Messages.Error();
-            else Messages.ShowResult(_menu[key]);           
+            else _menu[key](selects[Convert.ToInt32(key)-1]); 
+            
                       
         }                 
               
