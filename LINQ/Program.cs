@@ -7,8 +7,7 @@ namespace LINQ
 
     class Program
     {
-        private static List<Country> countries;
-        private static Dictionary<string, IEnumerable<object>> _menu;
+                
         static void Main()
         {
             Country Russia = new Country("Russia", "Moscow", 146748590, 17098246, "Europe");
@@ -17,30 +16,25 @@ namespace LINQ
             Country Kenya = new Country("Kenya", "Nairobi", 54985698, 580367, "Africa");
             Country USA = new Country("USA", "Washington", 332278200, 9826675, "North America");
 
-            countries = new List<Country>() { Russia, Latvia, China, Kenya, USA };
-
+            List<Country> countries = new List<Country>() { Russia, Latvia, China, Kenya, USA };
+         
             Messages.Info();
 
             var key = Console.ReadLine();
 
-            _menu = new Dictionary<string, IEnumerable<object>>
+            Dictionary<string, IEnumerable<object>> _menu = new Dictionary<string, IEnumerable<object>>
             {
-                {"1", countries.Select(item => item)},
+                {"1", countries.Select(item => item) },
                 {"2", countries.Select(item => item.name)},
                 {"3", countries.Select(item => item.capital)},
-                {"4", countries.Where(item=>item.partOfTheWorld=="Europe").Select(item=>item.name) },
-                {"5", countries.Where(item => item.territory > 1400000 ).Select(item => item.name) }
+                {"4", countries.Where(item=>item.partOfTheWorld=="Europe").Select(item=>item.name)},
+                {"5", countries.Where(item => item.territory > 1400000 ).Select(item => item.name)}
             };
-            Menu(key);
-
-            
+            if (!_menu.ContainsKey(key)) Messages.Error();
+            else Show(_menu[key]);           
+                      
         }
-        public static void Menu(string operationNumber)
-        {
-            if (!_menu.ContainsKey(operationNumber)) Messages.Error();
-            else Show(_menu[operationNumber]);        
-        }
-                
+                      
         private static void Show(IEnumerable<object> items)
         {           
                 foreach (var item in items)
