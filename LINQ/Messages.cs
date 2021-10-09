@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LINQ
 {
@@ -20,6 +18,16 @@ namespace LINQ
         public static void Error()
         {
             Console.WriteLine("Ошибка! Введен неправильный пункт меню.");
+        }
+        public static void ShowResult(IEnumerable<object> items)
+        {
+            foreach (var item in items)
+            {
+                if (item is Country t)
+                    Console.WriteLine($"Страна: {t.name}\nСтолица: {t.capital}\nНаселение: {t.population} человек\nПлощадь: {t.territory} км^2\nЧасть света: {t.partOfTheWorld}\n");
+                else Console.WriteLine($"{item}");
+            }
+
         }
     }
 }

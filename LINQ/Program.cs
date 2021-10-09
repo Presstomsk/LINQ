@@ -31,23 +31,10 @@ namespace LINQ
                 {"5", countries.Where(item => item.territory > 1400000 ).Select(item => item.name)}
             };
             if (!_menu.ContainsKey(key)) Messages.Error();
-            else Show(_menu[key]);           
+            else Messages.ShowResult(_menu[key]);           
                       
-        }
-                      
-        private static void Show(IEnumerable<object> items)
-        {           
-                foreach (var item in items)
-            {
-                if (item is Country t) 
-                    Console.WriteLine($"Страна: {t.name}\nСтолица: {t.capital}\nНаселение: {t.population} человек\nПлощадь: {t.territory} км^2\nЧасть света: {t.partOfTheWorld}\n");
-                else Console.WriteLine($"{item}");
-            }                    
-             
-        }
-       
-       
-
+        }                 
+              
     }
 
 }
