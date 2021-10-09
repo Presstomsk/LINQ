@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LINQ
 {
-    class Messages
+    static class Messages
     {
         public static void Info()
         {
