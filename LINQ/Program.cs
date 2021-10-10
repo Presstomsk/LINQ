@@ -29,22 +29,21 @@ namespace LINQ
                 countries.Where(item => item.territory > 1400000 ).Select(item => item.name)
             };
 
-
             Operation Op = (items) => { Messages.ShowResult(items); };
 
-            Dictionary<string, Operation> _menu = new Dictionary<string, Operation>
+            Dictionary<string, Operation> menu = new Dictionary<string, Operation>
             {
-                  {"1", Op},
-                  {"2", Op},
-                  {"3", Op},
-                  {"4", Op},
-                  {"5", Op}
+                  {"1", Op },
+                  {"2", Op },
+                  {"3", Op },
+                  {"4", Op },
+                  {"5", Op }
             };
 
             Messages.Info();
             var key = Console.ReadLine();     
-            if (!_menu.ContainsKey(key)) Messages.Error();
-            else _menu[key](selects[Convert.ToInt32(key)-1]);         
+            if (!menu.ContainsKey(key)) Messages.Error();
+            else menu[key](selects[Convert.ToInt32(key)-1]);         
                      
         }                 
               
